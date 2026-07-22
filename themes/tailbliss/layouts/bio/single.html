@@ -1,0 +1,68 @@
+{{ define "main" }}
+<main class="min-h-screen bg-black text-white">
+  <article class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-14 lg:py-36">
+    <div class="grid gap-14 lg:grid-cols-12 lg:gap-20">
+      <header class="lg:col-span-4">
+        <p class="mb-5 text-sm tracking-[0.28em] text-white/50 uppercase">Biography</p>
+        <h1 class="font-serif text-6xl font-normal tracking-tight sm:text-7xl lg:text-8xl">{{ .Title }}</h1>
+        <div class="mt-10 h-px w-20 bg-white/50"></div>
+
+        {{ with .Params.bio_image }}
+          {{ with resources.Get . }}
+            {{ $portraitSmall := .Resize "480x webp q85" }}
+            {{ $portraitLarge := .Resize "900x webp q88" }}
+            <figure class="mt-12 overflow-hidden bg-white/5">
+              <img
+                src="{{ $portraitLarge.RelPermalink }}"
+                srcset="{{ $portraitSmall.RelPermalink }} 480w, {{ $portraitLarge.RelPermalink }} 900w"
+                sizes="(max-width: 1023px) 100vw, 32vw"
+                width="{{ $portraitLarge.Width }}"
+                height="{{ $portraitLarge.Height }}"
+                alt="Portrait of Deqi Mu"
+                class="aspect-[3/4] w-full object-cover object-top"
+                loading="eager"
+                fetchpriority="high">
+            </figure>
+          {{ end }}
+        {{ end }}
+      </header>
+
+      <div class="bio-copy lg:col-span-8">
+        {{ .Content }}
+      </div>
+    </div>
+  </article>
+</main>
+
+<style>
+  .bio-copy {
+    max-width: 52rem;
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.74);
+  }
+
+  .bio-copy p {
+    margin: 0 0 1.75rem;
+  }
+
+  .bio-copy p:first-child {
+    margin-bottom: 2.6rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.8rem, 3.2vw, 3.3rem);
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+    color: #fff;
+  }
+
+  .bio-copy em {
+    color: #fff;
+  }
+
+  @media (max-width: 1023px) {
+    .bio-copy p:first-child {
+      margin-bottom: 2.25rem;
+    }
+  }
+</style>
+{{ end }}

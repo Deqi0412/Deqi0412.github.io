@@ -1,0 +1,74 @@
+{{ define "main" }}
+<main class="min-h-screen bg-black text-white">
+  <article class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-14 lg:py-32">
+    <header class="mb-16 flex flex-col gap-6 border-b border-white/15 pb-10 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="mb-4 text-xs tracking-[0.28em] text-white/45 uppercase">Watch & listen</p>
+        <h1 class="font-serif text-6xl font-normal tracking-tight sm:text-7xl">{{ .Title }}</h1>
+      </div>
+      <p class="max-w-md text-sm leading-7 text-white/55">{{ .Description }}</p>
+    </header>
+
+    <section aria-labelledby="videos-heading">
+      <h2 id="videos-heading" class="mb-10 font-serif text-4xl font-normal">{{ default "Videos" .Params.videos_title }}</h2>
+      <div class="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+        {{ range .Params.videos }}
+          <article>
+            <div class="aspect-video overflow-hidden bg-white/5">
+              <iframe
+                src="{{ .embed_url | safeURL }}"
+                title="{{ .title }}"
+                class="h-full w-full"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+            <h3 class="mt-6 font-serif text-2xl">{{ .title }}</h3>
+            {{ with .description }}<p class="mt-2 max-w-xl text-sm leading-6 text-white/55">{{ . }}</p>{{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="mt-28 border-t border-white/15 pt-12" aria-labelledby="audio-heading">
+      <h2 id="audio-heading" class="mb-10 font-serif text-4xl font-normal">{{ default "Audio" .Params.audio_title }}</h2>
+      <div class="grid gap-x-8 gap-y-14 md:grid-cols-2">
+        {{ range .Params.audio }}
+          <article>
+            <div class="overflow-hidden bg-white">
+              <iframe
+                src="{{ .embed_url | safeURL }}"
+                title="{{ .title }}"
+                class="block h-[166px] w-full"
+                scrolling="no"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <h3 class="mt-6 font-serif text-2xl">{{ .title }}</h3>
+            {{ with .description }}<p class="mt-2 max-w-xl text-sm leading-6 text-white/55">{{ . }}</p>{{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="mt-28 border-t border-white/15 pt-12" aria-labelledby="photos-heading">
+      <h2 id="photos-heading" class="mb-10 font-serif text-4xl font-normal">{{ default "Photography" .Params.photography_title }}</h2>
+      <div class="columns-1 gap-6 md:columns-2 lg:columns-3">
+        {{ range $index, $item := .Params.photography }}
+          {{ with resources.Get $item.image }}
+            {{ $photo := .Resize "1500x webp q87" }}
+            <figure class="mb-6 break-inside-avoid overflow-hidden bg-white/5">
+              <img src="{{ $photo.RelPermalink }}" width="{{ $photo.Width }}" height="{{ $photo.Height }}" alt="{{ default (printf "Deqi Mu photography %d" (add $index 1)) $item.alt }}" class="h-auto w-full transition duration-700 hover:scale-[1.01]" loading="lazy">
+            </figure>
+          {{ end }}
+        {{ end }}
+      </div>
+    </section>
+  </article>
+</main>
+{{ end }}

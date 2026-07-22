@@ -1,0 +1,62 @@
+baseURL: 'https://mudeqi.pages.dev/'
+title: Deqi Mu
+languageCode: en-us
+theme: tailbliss
+defaultContentLanguage: en
+enableEmoji: true
+enableRobotsTXT: true
+
+pagination:
+  pagerSize: 9
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+params:
+  author: Deqi Mu
+  description: "Deqi Mu is a percussionist focused on solo performance, chamber music, contemporary music, and interdisciplinary collaboration."
+  og_image: '/images/deqi-mu-cover.jpg'
+  disable_theme_toggle: true
+
+  social_media:
+    github:
+      enabled: false
+    facebook:
+      enabled: false
+      url: 'https://facebook.com/mudeqi'
+    instagram:
+      enabled: true
+      url: 'https://instagram.com/mudeqi'
+    twitter:
+      enabled: false
+      url: 'https://twitter.com/mudeqi'
+
+menu:
+  main:
+    - identifier: bio
+      name: bio
+      url: /bio/
+      weight: 10
+    - identifier: media
+      name: media
+      url: /media/
+      weight: 20
+    - identifier: events
+      name: events
+      url: /events/
+      weight: 30
+    - identifier: contact
+      name: contact
+      url: /contact/
+      weight: 40
+
+taxonomies:
+  category: Categories
+  tag: Tags
+
+module:
+  hugoVersion:
+    extended: true
+    min: "0.158.0"

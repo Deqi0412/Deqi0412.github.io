@@ -1,0 +1,13 @@
+.DS_Store
+node_modules/
+
+public/
+
+resources/
+
+
+static/.vite/
+static/main.*.js
+/static/css/.vite
+static/css/main.seBbl4PY.css
+.hugo_build.lock

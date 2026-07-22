@@ -1,0 +1,34 @@
+{{ define "main" }}
+<main class="min-h-screen bg-black text-white">
+  <article class="mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-24 lg:px-14 lg:py-28">
+    <a href="{{ .Parent.RelPermalink }}" class="text-xs tracking-[0.16em] text-white/55 uppercase transition hover:text-white">← All media</a>
+
+    <header class="mt-12 max-w-4xl">
+      <h1 class="font-serif text-5xl font-normal leading-tight tracking-[-0.03em] sm:text-6xl lg:text-7xl">{{ .Title }}</h1>
+      <p class="mt-6 max-w-2xl text-base leading-7 text-white/55">{{ .Description }}</p>
+    </header>
+
+    {{ if eq .Params.media_type "video" }}
+      <div class="mt-14 aspect-video overflow-hidden bg-white/5">
+        <iframe src="{{ .Params.embed_url }}" title="{{ .Title }}" class="h-full w-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
+    {{ else if eq .Params.media_type "audio" }}
+      <div class="mt-14 overflow-hidden bg-white">
+        <iframe src="{{ .Params.embed_url | safeURL }}" title="{{ .Title }}" class="block h-[166px] w-full" scrolling="no" frameborder="0" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+      </div>
+    {{ else }}
+      {{ with .Params.image }}
+        {{ with resources.Get . }}
+          {{ $image := .Resize "1800x webp q88" }}
+          <figure class="mt-14 overflow-hidden bg-white/5">
+            <img src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ $.Title }}" class="h-auto w-full" loading="eager" fetchpriority="high">
+          </figure>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    <div class="media-detail-copy mt-12 max-w-3xl text-lg leading-8 text-white/65">{{ .Content }}</div>
+  </article>
+</main>
+<style>.media-detail-copy p{margin-bottom:1.5rem}.media-detail-copy em{color:white}</style>
+{{ end }}

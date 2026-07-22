@@ -1,0 +1,74 @@
+{{ define "main" }}
+{{ $hero := resources.Get .Params.hero_image }}
+<main class="bg-black">
+  <article class="home-hero relative isolate overflow-hidden" aria-label="Deqi Mu, percussionist">
+    {{ with $hero }}
+      {{ $small := .Resize "900x webp q84" }}
+      {{ $medium := .Resize "1500x webp q86" }}
+      {{ $large := .Resize "2400x webp q88" }}
+      <img
+        src="{{ $large.RelPermalink }}"
+        srcset="{{ $small.RelPermalink }} 900w, {{ $medium.RelPermalink }} 1500w, {{ $large.RelPermalink }} 2400w"
+        sizes="100vw"
+        width="{{ $large.Width }}"
+        height="{{ $large.Height }}"
+        alt="Deqi Mu holding percussion mallets"
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+        fetchpriority="high">
+    {{ end }}
+
+    <div class="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/10" aria-hidden="true"></div>
+
+    <div class="home-quote absolute z-10 max-w-xl text-stone-950">
+      <h1 class="font-serif text-2xl font-normal leading-[1.25] tracking-[-0.02em] sm:text-3xl lg:text-[2.15rem]">
+        “{{ .Params.hero_quote }}”
+      </h1>
+      <p class="mt-7 font-serif text-2xl italic sm:text-3xl">—{{ .Params.hero_credit }}</p>
+    </div>
+  </article>
+</main>
+
+<style>
+  .home-hero {
+    height: max(100svh, 69.75vw);
+    max-height: 1100px;
+    min-height: 680px;
+  }
+
+  .home-hero > img {
+    width: 100%;
+    height: 100%;
+    object-position: center center;
+  }
+
+  .home-quote {
+    left: clamp(2rem, 7vw, 8rem);
+    top: 48%;
+    width: min(38vw, 34rem);
+  }
+
+  @media (max-width: 767px) {
+    .home-hero {
+      min-height: 100svh;
+      max-height: none;
+    }
+
+    .home-hero > img {
+      object-position: 63% center;
+    }
+
+    .home-quote {
+      top: auto;
+      right: 1.5rem;
+      bottom: 3rem;
+      left: 1.5rem;
+      width: auto;
+      padding: 1.25rem;
+      color: white;
+      background: rgba(0, 0, 0, 0.44);
+      backdrop-filter: blur(5px);
+    }
+  }
+</style>
+{{ end }}
