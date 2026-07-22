@@ -5,7 +5,9 @@ on:
     branches:
       - main
       - master
-      
+
+permissions:
+  contents: write
 
 jobs:
   update_hugo_npm_dependencies:
@@ -71,4 +73,4 @@ jobs:
             folder: public
             # token: ${{ secrets.ACCESSTOKEN }}
             # clean: true
-            single-commit: true 
+            single-commit: true
