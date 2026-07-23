@@ -2,11 +2,15 @@
 <main class="min-h-screen bg-black text-white">
   <article>
     <header class="relative isolate flex min-h-[560px] items-end justify-center overflow-hidden pb-20 text-center sm:min-h-[650px]">
-      {{ with .Params.hero_image }}
-        {{ with resources.Get . }}
-          {{ $hero := .Resize "1800x webp q87" }}
-          <img src="{{ $hero.RelPermalink }}" width="{{ $hero.Width }}" height="{{ $hero.Height }}" alt="Deqi Mu" class="absolute inset-0 -z-20 h-full w-full object-cover object-[center_22%]" loading="eager" fetchpriority="high">
-        {{ end }}
+      {{ $mobileHero := resources.Get .Params.hero_image }}
+      {{ $desktopHero := resources.Get .Params.hero_image_desktop }}
+      {{ if and $mobileHero $desktopHero }}
+        {{ $mobileHero = $mobileHero.Resize "1200x webp q87" }}
+        {{ $desktopHero = $desktopHero.Resize "1800x webp q87" }}
+        <picture class="absolute inset-0 -z-20 h-full w-full">
+          <source media="(min-width: 768px)" srcset="{{ $desktopHero.RelPermalink }}">
+          <img src="{{ $mobileHero.RelPermalink }}" width="{{ $mobileHero.Width }}" height="{{ $mobileHero.Height }}" alt="Deqi Mu" class="h-full w-full object-cover object-[center_22%]" loading="eager" fetchpriority="high">
+        </picture>
       {{ end }}
       <div class="absolute inset-0 -z-10 bg-gradient-to-b from-black/30 via-black/5 to-black/55"></div>
       <h1 class="font-serif text-5xl font-normal tracking-[-0.03em] sm:text-6xl lg:text-7xl">{{ .Params.hero_heading }}</h1>
