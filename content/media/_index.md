@@ -5,18 +5,18 @@ overlay_nav: false
 videos_title: "Videos"
 videos:
   - title: "Ivan Trevino — Catching Shadows"
-    description: "A performance of Ivan Trevino's Catching Shadows."
+    description: "Marimba trio arrangement by TrioColores, with Hanna Piao and Yizhuo Li."
     embed_url: "https://www.youtube.com/embed/5i1XJFrfedI"
   - title: "Garth Neustadter — Seaborne"
-    description: "A performance of Garth Neustadter's Seaborne."
+    description: "Recorded live with the Peabody Percussion Group, February 2024."
     embed_url: "https://www.youtube.com/embed/jGvX0TH70Pc"
   - title: "Emmanuel Séjourné — Concerto for Marimba and Strings"
-    description: "A performance of Emmanuel Séjourné's Concerto for Marimba and Strings."
+    description: "Recorded live at Corson Auditorium, April 2023."
     embed_url: "https://www.youtube.com/embed/2Afe8h7cBAw"
 audio_title: "Audio"
 audio:
   - title: "Kevin Volans — She Who Sleeps with a Small Blanket"
-    description: "An audio performance of Kevin Volans' She Who Sleeps with a Small Blanket."
+    description: "Recorded at the Peabody Recording Studio, April 2026."
     embed_url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2365616666&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
 photography_title: "Photography"
 photography:
