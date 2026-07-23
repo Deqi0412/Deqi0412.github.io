@@ -28,7 +28,7 @@ params:
       url: 'https://facebook.com/mudeqi'
     instagram:
       enabled: true
-      url: 'https://instagram.com/mudeqi'
+      url: 'https://instagram.com/deqi_muu'
     twitter:
       enabled: false
       url: 'https://twitter.com/mudeqi'
